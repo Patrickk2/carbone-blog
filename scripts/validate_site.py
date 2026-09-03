@@ -27,14 +27,14 @@ def validate_post(path: Path) -> int:
     text = path.read_text(encoding="utf-8")
     if not text.lstrip().lower().startswith("<!doctype html>"):
         fail(f"{path}: missing doctype")
-    if not re.search(r'<html[^>]+lang=["\'][a-z-]+["\']', text, re.I):
+    if not re.search(r'''<html[^>]+lang=["'][a-z-]+["']''', text, re.I):
         fail(f"{path}: missing lang")
     if len(re.findall(r"<h1\b", text, re.I)) != 1:
         fail(f"{path}: expected exactly one h1")
     title_match = re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S)
     if not title_match or not clean(title_match.group(1)):
         fail(f"{path}: missing title")
-    if re.search(r"<meta[^>]+name=["\']description["\']", text, re.I) is None:
+    if re.search(r'''<meta[^>]+name=["']description["']''', text, re.I) is None:
         print(f"WARNING: {path} uses legacy metadata; it will be normalized on the next publication run.")
     if re.search(r"javascript:|<iframe|<object|<embed|\son\w+\s*=", text, re.I):
         fail(f"{path}: unsafe markup detected")
