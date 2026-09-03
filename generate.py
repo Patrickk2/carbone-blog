@@ -514,6 +514,135 @@ def get_mock_generated_post(category):
         "body": chosen["body"]
     }
 
+def generate_sitemap_xml(posts_dir="posts", base_url="https://patrickk2.github.io/carbone-blog"):
+    """
+    Dynamically generates sitemap.xml listing the home page, about page, and all blog posts.
+    """
+    print("Generating sitemap.xml...")
+    post_files = [f for f in os.listdir(posts_dir) if f.startswith("post-") and f.endswith(".html")]
+    post_files.sort(reverse=True)
+
+    urls = []
+
+    # Add static pages
+    now_date = datetime.now().strftime("%Y-%m-%d")
+    urls.append(f"""  <url>
+    <loc>{base_url}/index.html</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>""")
+    urls.append(f"""  <url>
+    <loc>{base_url}/about.html</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    # Add each post file
+    for filename in post_files:
+        filepath = os.path.join(posts_dir, filename)
+        # Use file modification time or default date
+        try:
+            mtime = os.path.getmtime(filepath)
+            post_date = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d")
+        except Exception:
+            post_date = now_date
+
+        urls.append(f"""  <url>
+    <loc>{base_url}/posts/{filename}</loc>
+    <lastmod>{post_date}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>""")
+
+    urls_str = "\n".join(urls)
+
+    sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{urls_str}
+</urlset>"""
+
+    with open("sitemap.xml", "w", encoding="utf-8") as f:
+        f.write(sitemap_xml)
+    print("Successfully generated/updated sitemap.xml!")
+
+
+def generate_feed_xml(posts_dir="posts", base_url="https://patrickk2.github.io/carbone-blog"):
+    """
+    Dynamically scans the posts directory, reads all files (post-XX.html),
+    extracts metadata and body, and writes a complete feed.xml at the root.
+    """
+    print("Generating feed.xml...")
+    import xml.etree.ElementTree as ET
+    from xml.sax.saxutils import escape
+
+    post_files = [f for f in os.listdir(posts_dir) if f.startswith("post-") and f.endswith(".html")]
+    post_files.sort(reverse=True) # newest first
+
+    items = []
+    for filename in post_files:
+        filepath = os.path.join(posts_dir, filename)
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Extract info with regexes
+            title_match = re.search(r"<title>(.*?)</title>", content, re.IGNORECASE | re.DOTALL)
+            tag_match = re.search(r'<span class="article-tag">(.*?)</span>', content, re.IGNORECASE | re.DOTALL)
+            date_match = re.search(r'<span class="article-date">(.*?)</span>', content, re.IGNORECASE | re.DOTALL)
+            body_match = re.search(r'<div class="article-body">(.*?)<hr/>', content, re.IGNORECASE | re.DOTALL)
+
+            title = title_match.group(1).strip() if title_match else "Carbone Post"
+            # Remove any raw html formatting from title
+            title = re.sub(r'<[^>]+>', '', title)
+
+            tag = tag_match.group(1).strip() if tag_match else "general"
+            date_str = date_match.group(1).strip() if date_match else "April 2026"
+            body = body_match.group(1).strip() if body_match else ""
+
+            # Attempt to parse date to RFC 822 format (e.g., "Mon, 01 Apr 2026 09:00:00 +0000")
+            # If date format is like "April 2026", default to 1st of that month
+            try:
+                dt = datetime.strptime(date_str, "%B %Y")
+                rfc_date = dt.strftime("%a, 01 %b %Y 09:00:00 +0000")
+            except Exception:
+                rfc_date = "Tue, 21 Jul 2026 09:00:00 +0000"
+
+            post_url = f"{base_url}/posts/{filename}"
+
+            item_xml = f"""    <item>
+      <title>{escape(title)}</title>
+      <link>{post_url}</link>
+      <guid>{post_url}</guid>
+      <pubDate>{rfc_date}</pubDate>
+      <category>{escape(tag.lower())}</category>
+      <description>{escape(body[:300] + '...')}</description>
+    </item>"""
+            items.append(item_xml)
+        except Exception as e:
+            print(f"Error parsing {filename} for feed: {e}")
+
+    items_str = "\n".join(items)
+
+    feed_xml = f"""<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Carbone Notes</title>
+  <link>{base_url}</link>
+  <description>Notes, thoughts, and guides from the Carbone ecosystem — written plainly, published openly.</description>
+  <language>en-us</language>
+  <atom:link href="{base_url}/feed.xml" rel="self" type="application/rss+xml" />
+  <lastBuildDate>{datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")}</lastBuildDate>
+{items_str}
+</channel>
+</rss>"""
+
+    with open("feed.xml", "w", encoding="utf-8") as f:
+        f.write(feed_xml)
+    print("Successfully generated/updated feed.xml!")
+
+
 def main():
     print("=== AUTOMATED BLOG POST GENERATOR STARTING ===")
 
@@ -596,9 +725,13 @@ def main():
     # decoding="async" prevents decoding from blocking the main thread.
     image_tag = f'<img src="{image_url}" alt="{post_data["category"]} post image" class="article-image" width="800" height="450" decoding="async" />'
 
+    # Remove tags from title for plain title text (e.g. for <title> tag)
+    plain_title = post_data["title"].replace("<em>", "").replace("</em>", "").replace("<strong>", "").replace("</strong>", "")
+
     # Render the HTML post
     rendered_post = template \
         .replace("{{POST_TITLE}}", post_data["title"]) \
+        .replace("{{POST_PLAIN_TITLE}}", plain_title) \
         .replace("{{POST_TAG}}", post_data["category"].upper()) \
         .replace("{{POST_DATE}}", formatted_date_long) \
         .replace("{{POST_IMAGE}}", image_tag) \
@@ -655,6 +788,13 @@ def main():
         f.write(new_index_html)
 
     print("Successfully updated index.html with the new post entry!")
+
+    # 6. Generate/update feed.xml
+    generate_feed_xml()
+
+    # 7. Generate/update sitemap.xml
+    generate_sitemap_xml()
+
     print("=== PIPELINE RUN COMPLETE ===")
 
 if __name__ == "__main__":

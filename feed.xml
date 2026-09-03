@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Carbone Notes</title>
+  <link>https://patrickk2.github.io/carbone-blog</link>
+  <description>Notes, thoughts, and guides from the Carbone ecosystem — written plainly, published openly.</description>
+  <language>en-us</language>
+  <atom:link href="https://patrickk2.github.io/carbone-blog/feed.xml" rel="self" type="application/rss+xml" />
+  <lastBuildDate>Wed, 22 Jul 2026 19:09:32 +0000</lastBuildDate>
+    <item>
+      <title>The Science of Rest: Rethinking Digital Fatigue</title>
+      <link>https://patrickk2.github.io/carbone-blog/posts/post-03.html</link>
+      <guid>https://patrickk2.github.io/carbone-blog/posts/post-03.html</guid>
+      <pubDate>Wed, 01 Jul 2026 09:00:00 +0000</pubDate>
+      <category>health</category>
+      <description>&lt;p&gt;We are living through a massive, unmonitored human trial. Every waking hour, we feed our brains continuous streams of high-intensity digital stimulation. We wake up to notifications, eat lunch scrolling through feeds, and go to bed with bright screens inches from our eyes.&lt;/p&gt;
+
+&lt;h2&gt;The Dopamine D...</description>
+    </item>
+    <item>
+      <title>The Cloud Repatriation Movement is Gaining Steam</title>
+      <link>https://patrickk2.github.io/carbone-blog/posts/post-02.html</link>
+      <guid>https://patrickk2.github.io/carbone-blog/posts/post-02.html</guid>
+      <pubDate>Wed, 01 Jul 2026 09:00:00 +0000</pubDate>
+      <category>technology</category>
+      <description>&lt;p&gt;For the past decade, the tech mantra was simple: migrate everything to the cloud. AWS, Azure, and Google Cloud became the default destinations for startups and enterprises alike. But in 2026, a growing counter-cultural movement is gaining ground: cloud repatriation.&lt;/p&gt;
+
+&lt;h2&gt;The True Cost of Conv...</description>
+    </item>
+    <item>
+      <title>Vaping : What Nobody Tells You Before You Start</title>
+      <link>https://patrickk2.github.io/carbone-blog/posts/post-01.html</link>
+      <guid>https://patrickk2.github.io/carbone-blog/posts/post-01.html</guid>
+      <pubDate>Wed, 01 Apr 2026 09:00:00 +0000</pubDate>
+      <category>health</category>
+      <description>&lt;p&gt;I started vaping a month ago. I'm quitting while writing this.&lt;/p&gt;
+
+      &lt;p&gt;Nobody handed me a warning label. Nobody said: this thing reaches your brain in ten seconds, rewires your dopamine, and turns a casual habit into a need before you've even noticed. I just picked it up — because it looked...</description>
+    </item>
+</channel>
+</rss>
