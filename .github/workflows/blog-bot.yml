@@ -1,11 +1,9 @@
-# GitHub Actions workflow to run the Automated Blog Generator
-name: Auto Blog Publisher
+name: Daily editorial publisher
 
 on:
   schedule:
-    # Run every day at 09:00 UTC.
     - cron: '0 9 * * *'
-  workflow_dispatch: # Allows manual trigger from the GitHub UI
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,9 +15,12 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: Checkout repository
+      - name: START
+        run: echo "START $(date -u +%FT%TZ)"
+
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -30,45 +31,57 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests
+        run: python -m pip install -r requirements.txt
 
-      - name: Validate OpenRouter API configuration
-        env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          if [ -z "$OPENROUTER_API_KEY" ]; then
-            echo "ERROR: OPENROUTER_API_KEY secret is missing or empty."
-            exit 1
-          fi
-
-          echo "Checking OpenRouter authentication..."
-          curl --fail-with-body --silent --show-error \
-            --retry 3 --retry-delay 5 \
-            -H "Authorization: Bearer $OPENROUTER_API_KEY" \
-            https://openrouter.ai/api/v1/models > /dev/null
-
-          echo "OpenRouter authentication check passed."
-
-      - name: Run Blog Generator
+      - name: Validate production configuration
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
         run: |
-          python generate.py
+          test -n "$OPENROUTER_API_KEY" || { echo "ERROR STAGE=CONFIG ERROR TYPE=missing_secret ERROR MESSAGE=OPENROUTER_API_KEY is missing"; exit 1; }
+          test -n "$NEWS_API_KEY" || { echo "ERROR STAGE=CONFIG ERROR TYPE=missing_secret ERROR MESSAGE=NEWS_API_KEY is missing"; exit 1; }
+          echo "MODEL ${OPENROUTER_MODEL:-openrouter/auto}"
 
-      - name: Commit and push changes
+      - name: Verify API access
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+        run: python generate.py --check-api
+
+      - name: FETCH SOURCES / GENERATE / RENDER
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          OPENROUTER_FALLBACK_MODELS: ${{ vars.OPENROUTER_FALLBACK_MODELS }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python generate.py
+
+      - name: VALIDATE HTML / RSS / SITEMAP
+        run: python scripts/validate_site.py
+
+      - name: VERIFY WORKTREE
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add posts/ index.html feed.xml sitemap.xml
+          git status --short
+          git diff --check
 
+      - name: COMMIT
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts/ index.html archive.html topics.html feed.xml sitemap.xml
           if git diff --cached --quiet; then
-            echo "No blog changes to commit."
-            exit 0
+            echo "ERROR STAGE=COMMIT ERROR TYPE=no_changes ERROR MESSAGE=generator produced no publishable changes"
+            exit 1
           fi
+          git commit -m "Auto-publish Carbone Notes edition [skip ci]"
 
-          git commit -m "Auto-published a new blog post [skip ci]"
+      - name: PUSH
+        run: |
           git pull --rebase origin main
           git push origin HEAD:main
+
+      - name: END
+        run: echo "END $(date -u +%FT%TZ)"

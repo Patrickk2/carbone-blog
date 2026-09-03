@@ -1,0 +1,33 @@
+/* Compatibility layer for legacy article HTML retained during migration. */
+html, body { overflow-x: hidden; }
+body main .article-wrap {
+  width: min(calc(100% - 2rem), 920px);
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 4.5rem 0 6rem;
+}
+body main h1.article-title {
+  max-width: 15ch;
+  margin: .9rem 0 1rem;
+  font: 400 clamp(2.65rem, 6vw, 5.15rem)/.96 Georgia, "Times New Roman", serif;
+  letter-spacing: -.048em;
+}
+body main .article-eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1rem; }
+body main .article-date { color: var(--muted); font: 500 .68rem/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+body main .article-tag { color: var(--accent); font: 600 .67rem/1.3 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+body main .article-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--rule); border-radius: 0; }
+body main .article-body { max-width: 700px; margin-top: 2.5rem; font-family: Georgia, "Times New Roman", serif; font-size: 1.08rem; line-height: 1.82; color: var(--ink); }
+body main .article-body p { margin: 0 0 1.45rem; }
+body main .article-body h2 { margin: 2.6rem 0 .9rem; font: 400 1.9rem/1.1 Georgia, "Times New Roman", serif; letter-spacing: -.025em; }
+body main .article-body blockquote { margin: 2rem 0; padding: .1rem 0 .1rem 1.3rem; border-left: 2px solid var(--accent); color: var(--muted); }
+body main .back-link { display: inline-flex; margin-top: 0; color: var(--muted); font: 600 .68rem/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+body > header:not(.site-header) { width: min(calc(100% - 2rem), 1180px); margin: 0 auto; background: var(--bg); }
+body > header:not(.site-header) .logo-mark { font: 400 1.35rem/1 Georgia, "Times New Roman", serif; }
+body > header:not(.site-header) nav a { color: var(--muted); font: 500 .72rem/1 var(--mono); }
+body > header:not(.site-header) nav a:hover { color: var(--ink); }
+body > footer:not(.site-footer) { width: min(calc(100% - 2rem), 1180px); max-width: 1180px; margin: 0 auto; }
+@media (max-width: 760px) {
+  body main .article-wrap { padding-top: 3.3rem; }
+  body main h1.article-title { font-size: 3rem; }
+  body main .article-body { font-size: 1.03rem; }
+}

@@ -1,41 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Carbone Notes</title>
-  <link>https://patrickk2.github.io/carbone-blog</link>
-  <description>Notes, thoughts, and guides from the Carbone ecosystem — written plainly, published openly.</description>
-  <language>en-us</language>
-  <atom:link href="https://patrickk2.github.io/carbone-blog/feed.xml" rel="self" type="application/rss+xml" />
-  <lastBuildDate>Wed, 22 Jul 2026 19:09:32 +0000</lastBuildDate>
-    <item>
-      <title>The Science of Rest: Rethinking Digital Fatigue</title>
-      <link>https://patrickk2.github.io/carbone-blog/posts/post-03.html</link>
-      <guid>https://patrickk2.github.io/carbone-blog/posts/post-03.html</guid>
-      <pubDate>Wed, 01 Jul 2026 09:00:00 +0000</pubDate>
-      <category>health</category>
-      <description>&lt;p&gt;We are living through a massive, unmonitored human trial. Every waking hour, we feed our brains continuous streams of high-intensity digital stimulation. We wake up to notifications, eat lunch scrolling through feeds, and go to bed with bright screens inches from our eyes.&lt;/p&gt;
-
-&lt;h2&gt;The Dopamine D...</description>
-    </item>
-    <item>
-      <title>The Cloud Repatriation Movement is Gaining Steam</title>
-      <link>https://patrickk2.github.io/carbone-blog/posts/post-02.html</link>
-      <guid>https://patrickk2.github.io/carbone-blog/posts/post-02.html</guid>
-      <pubDate>Wed, 01 Jul 2026 09:00:00 +0000</pubDate>
-      <category>technology</category>
-      <description>&lt;p&gt;For the past decade, the tech mantra was simple: migrate everything to the cloud. AWS, Azure, and Google Cloud became the default destinations for startups and enterprises alike. But in 2026, a growing counter-cultural movement is gaining ground: cloud repatriation.&lt;/p&gt;
-
-&lt;h2&gt;The True Cost of Conv...</description>
-    </item>
-    <item>
-      <title>Vaping : What Nobody Tells You Before You Start</title>
-      <link>https://patrickk2.github.io/carbone-blog/posts/post-01.html</link>
-      <guid>https://patrickk2.github.io/carbone-blog/posts/post-01.html</guid>
-      <pubDate>Wed, 01 Apr 2026 09:00:00 +0000</pubDate>
-      <category>health</category>
-      <description>&lt;p&gt;I started vaping a month ago. I'm quitting while writing this.&lt;/p&gt;
-
-      &lt;p&gt;Nobody handed me a warning label. Nobody said: this thing reaches your brain in ten seconds, rewires your dopamine, and turns a casual habit into a need before you've even noticed. I just picked it up — because it looked...</description>
-    </item>
+<title>Carbone Notes</title>
+<link>https://sudomarc.github.io/carbone-blog/</link>
+<description>Notes, analysis and guides on technology, security, science and digital culture.</description>
+<language>en-us</language>
+<atom:link href="https://sudomarc.github.io/carbone-blog/feed.xml" rel="self" type="application/rss+xml" />
+<lastBuildDate>Mon, 01 Sep 2026 13:51:08 GMT</lastBuildDate>
+<item><title>Fusion Power: Ignition Hurdles and the Road to Grid Power</title><link>https://sudomarc.github.io/carbone-blog/posts/post-18.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-18.html</guid><pubDate>Tue, 01 Sep 2026 13:51:08 GMT</pubDate><category>science</category><description>A grounded look at the gap between a fusion milestone in a laboratory and the engineering required for reliable grid electricity.</description></item>
+<item><title>The Science of Rest: Rethinking Digital Fatigue</title><link>https://sudomarc.github.io/carbone-blog/posts/post-17.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-17.html</guid><pubDate>Mon, 31 Aug 2026 16:36:22 GMT</pubDate><category>health</category><description>What continuous screen exposure can do to attention and sleep, and what a more deliberate digital routine looks like.</description></item>
+<item><title>Fusion Power: Ignition Hurdles and the Road to Grid Power</title><link>https://sudomarc.github.io/carbone-blog/posts/post-16.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-16.html</guid><pubDate>Fri, 28 Aug 2026 20:34:52 GMT</pubDate><category>science</category><description>A closer look at plasma stability, neutron damage and the engineering challenge beyond experimental net gain.</description></item>
+<item><title>The Science of Rest: Rethinking Digital Fatigue</title><link>https://sudomarc.github.io/carbone-blog/posts/post-15.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-15.html</guid><pubDate>Tue, 25 Aug 2026 09:28:24 GMT</pubDate><category>health</category><description>A practical examination of digital fatigue, attention, and why rest is harder when every device is an interruption.</description></item>
+<item><title>The Cloud Repatriation Movement is Gaining Steam</title><link>https://sudomarc.github.io/carbone-blog/posts/post-14.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-14.html</guid><pubDate>Sat, 22 Aug 2026 09:20:20 GMT</pubDate><category>technology</category><description>Why some technical teams are moving selected workloads back toward infrastructure they can control directly.</description></item>
+<item><title>Fusion Power: Ignition Hurdles and the Road to Grid Power</title><link>https://sudomarc.github.io/carbone-blog/posts/post-13.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-13.html</guid><pubDate>Wed, 19 Aug 2026 09:26:32 GMT</pubDate><category>science</category><description>What the physics has solved, what the materials have not, and where private fusion programs are concentrating effort.</description></item>
+<item><title>Prompt Injection: The Silent Ghost in the LLM Shell</title><link>https://sudomarc.github.io/carbone-blog/posts/post-12.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-12.html</guid><pubDate>Sun, 16 Aug 2026 09:20:44 GMT</pubDate><category>cybersecurity</category><description>How untrusted web content can manipulate an AI agent that is allowed to browse, reason and act.</description></item>
+<item><title>Fusion Power: Ignition Hurdles and the Road to Grid Power</title><link>https://sudomarc.github.io/carbone-blog/posts/post-11.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-11.html</guid><pubDate>Thu, 13 Aug 2026 09:57:05 GMT</pubDate><category>science</category><description>A sober read on fusion's remaining technical bottlenecks and the distance from experiment to infrastructure.</description></item>
+<item><title>Prompt Injection: The Silent Ghost in the LLM Shell</title><link>https://sudomarc.github.io/carbone-blog/posts/post-10.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-10.html</guid><pubDate>Mon, 10 Aug 2026 10:11:22 GMT</pubDate><category>cybersecurity</category><description>Where browser-based AI agents inherit risk from the pages they are asked to read.</description></item>
+<item><title>The Science of Rest: Rethinking Digital Fatigue</title><link>https://sudomarc.github.io/carbone-blog/posts/post-09.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-09.html</guid><pubDate>Fri, 07 Aug 2026 09:54:54 GMT</pubDate><category>health</category><description>How digital habits shape attention and sleep, and where simple changes can help.</description></item>
+<item><title>The Science of Rest: Rethinking Digital Fatigue</title><link>https://sudomarc.github.io/carbone-blog/posts/post-08.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-08.html</guid><pubDate>Tue, 04 Aug 2026 11:18:47 GMT</pubDate><category>health</category><description>A note on rest, attention and the cost of treating every idle moment as screen time.</description></item>
+<item><title>The Science of Rest: Rethinking Digital Fatigue</title><link>https://sudomarc.github.io/carbone-blog/posts/post-07.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-07.html</guid><pubDate>Sat, 01 Aug 2026 10:29:17 GMT</pubDate><category>health</category><description>A closer look at digital fatigue and the distinction between being connected and being occupied.</description></item>
+<item><title>Fusion Power: Ignition Hurdles and the Road to Grid Power</title><link>https://sudomarc.github.io/carbone-blog/posts/post-06.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-06.html</guid><pubDate>Fri, 31 Jul 2026 11:25:12 GMT</pubDate><category>science</category><description>What separates laboratory fusion gains from a power station that can run continuously.</description></item>
+<item><title>Prompt Injection: The Silent Ghost in the LLM Shell</title><link>https://sudomarc.github.io/carbone-blog/posts/post-05.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-05.html</guid><pubDate>Tue, 28 Jul 2026 11:11:26 GMT</pubDate><category>cybersecurity</category><description>A primer on indirect prompt injection and why autonomy changes the threat model.</description></item>
+<item><title>Prompt Injection: The Silent Ghost in the LLM Shell</title><link>https://sudomarc.github.io/carbone-blog/posts/post-04.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-04.html</guid><pubDate>Sat, 25 Jul 2026 10:22:43 GMT</pubDate><category>cybersecurity</category><description>The security boundary gets blurry when agents treat web pages as instructions.</description></item>
+<item><title>The Science of Rest: Rethinking Digital Fatigue</title><link>https://sudomarc.github.io/carbone-blog/posts/post-03.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-03.html</guid><pubDate>Wed, 01 Jul 2026 09:00:00 GMT</pubDate><category>health</category><description>Notes on attention, sleep and the frictionless nature of modern screens.</description></item>
+<item><title>The Cloud Repatriation Movement is Gaining Steam</title><link>https://sudomarc.github.io/carbone-blog/posts/post-02.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-02.html</guid><pubDate>Wed, 01 Jul 2026 09:00:00 GMT</pubDate><category>technology</category><description>The case for bringing selected workloads back under direct operational control.</description></item>
+<item><title>Vaping: What Nobody Tells You Before You Start</title><link>https://sudomarc.github.io/carbone-blog/posts/post-01.html</link><guid isPermaLink="true">https://sudomarc.github.io/carbone-blog/posts/post-01.html</guid><pubDate>Wed, 01 Apr 2026 09:00:00 GMT</pubDate><category>health</category><description>A personal, research-led note about the gap between a product's convenience and its health implications.</description></item>
 </channel>
 </rss>
