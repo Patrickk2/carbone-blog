@@ -75,7 +75,7 @@ jobs:
             echo "ERROR STAGE=COMMIT ERROR TYPE=no_changes ERROR MESSAGE=generator produced no publishable changes"
             exit 1
           fi
-          git commit -m "Auto-publish Carbone Notes edition [skip ci]"
+          git commit -m "Auto-publish Carbone Notes edition"
 
       - name: PUSH
         run: |
