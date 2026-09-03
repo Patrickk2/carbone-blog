@@ -30,6 +30,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Verify Python syntax
+        run: python -m py_compile generate.py scripts/validate_site.py
+
       - name: Verify published tree
         run: python scripts/validate_site.py
 
