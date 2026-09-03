@@ -37,26 +37,25 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
-          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'openrouter/auto' }}
         run: |
           test -n "$OPENROUTER_API_KEY" || { echo "ERROR STAGE=CONFIG ERROR TYPE=missing_secret ERROR MESSAGE=OPENROUTER_API_KEY is missing"; exit 1; }
           test -n "$NEWS_API_KEY" || { echo "ERROR STAGE=CONFIG ERROR TYPE=missing_secret ERROR MESSAGE=NEWS_API_KEY is missing"; exit 1; }
-          echo "MODEL ${OPENROUTER_MODEL:-openrouter/auto}"
+          echo "MODEL $OPENROUTER_MODEL"
 
       - name: Verify API access
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
-          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
         run: python generate.py --check-api
 
       - name: FETCH SOURCES / GENERATE / RENDER
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
-          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
-          OPENROUTER_FALLBACK_MODELS: ${{ vars.OPENROUTER_FALLBACK_MODELS }}
-          SITE_URL: ${{ vars.SITE_URL }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'openrouter/auto' }}
+          OPENROUTER_FALLBACK_MODELS: ${{ vars.OPENROUTER_FALLBACK_MODELS || '' }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://sudomarc.github.io/carbone-blog' }}
         run: python generate.py
 
       - name: VALIDATE HTML / RSS / SITEMAP
